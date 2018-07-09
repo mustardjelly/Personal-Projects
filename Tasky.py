@@ -1,6 +1,7 @@
 import time
 from TaskList import *
 import os
+import json
 #Tasky
 def load():
 	print('Welcome to Tasky')
@@ -10,8 +11,8 @@ def load():
 		file = open('tasky_save.txt', 'r')
 		in_data = file.readlines()
 		task_list.set_count(in_data.pop(-1))
-		for line in in_data:
-			task_list.add_task(line[:-1])
+		for i in range(len(in_data)):
+			task_list.add_task(in_data[i])
 		print('Previous tasks loaded!')
 	except():
 		open_data = task_list.populate_list()
@@ -31,6 +32,7 @@ def add_task(task_list):
 		return True
 	else:
 		return False
+		
 def save(task_list):
 	file = open('tasky_save.txt', 'w')
 	for task_element in task_list.save():
@@ -43,7 +45,6 @@ def main():
 	while (add_task(task_list)):
 		print('\nTasky')
 		main_screen(task_list)
-	
 	save(task_list)
 	
 main()
