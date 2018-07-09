@@ -15,17 +15,32 @@ class TaskList:
 				self.taskList[i] = str(input("Enter task {0}:".format(i + 1)))
 				
 	def inc_count(self):
-		self.count += 1
+		self.count = (self.count + 1) % 3
 		
 	def set_count(self, value):
-		self.count = int(value)
+		self.count = int(value) % 3
+		print(self.count)
 		
 	def get_count(self):
-		self.count = self.taskList.pop(-1)
+		return self.count
 	
-	def add_task(self, task, index):
+	def add_task(self, task, index = 'default'):
+		if (index == 'default'):
+			index = self.count % 3
 		self.taskList[index] = task
+		self.inc_count()
+		
+	def add_new_task(self, task):
+		self.add_task(task)
+		self.inc_count()
 		
 	def get_current_task(self):
 		curr_index = self.count % 3
 		return self.taskList[curr_index]
+		
+	def get_tasks(self):
+		return self.taskList
+		
+	def save(self):
+		print(self.taskList + [self.count])
+		return self.taskList + [self.count]
