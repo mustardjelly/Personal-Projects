@@ -27,29 +27,34 @@ def main_screen(task_list):
 	
 def add_task(task_list):
 	task = str(input('Next Task (x to e(X)it):\n'))
+	# Exit code
 	if (task.lower() == 'x'):
 		return False
+	# Reset Tasky
 	elif (task.lower() == 'reset'):
 		task_list.reset()
 		return True
+	# Correct current task
 	elif (task.lower() == 'correct'):
 		change = False
 		task_change = str(input("Enter the corrected task:\n"))
-		confirm = str(input('{0} will be replaced with {1}\nIs this correct? (y/n)?\n'.format(task_list.get_current_task(), task_change))).lower()
-		if (confirm == 'y'):
+		print('{0} will be replaced with {1}\n'.format(task_list.get_current_task(), task_change))
+		if (confirm()):
 			task_list.correct_task(task_change)
-			change = True
-		while (change == False or confirm == 'n'):
-			task_change = str(input("Enter the corrected task:\n"))
-			confirm = str(input('Is this correct? (y/n)?\n')).lower()
-			if (confirm == 'y'):
-				task_list.correct_task(task_change)
-				change = True
 		return True
-		
+	# Replace task and deliver new task
 	else:
 		task_list.add_task(task)
 		return True
+
+def confirm()
+	confirm = str(input('Are you sure (y/n)?\n')).lower()
+	while (confirm != 'y' or confirm != 'n'):
+		confirm = str(input('Invalid Answer\nAre you sure? (y/n)?\n')).lower()
+	if (confirm == 'y'):
+		return True
+	else:
+		return False
 		
 def save(task_list):
 	with open(SAVE_LOC, 'wb') as handle:

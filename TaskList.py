@@ -30,9 +30,9 @@ class TaskList:
 		self.taskList[index] = task
 		self.inc_count()
 		
-	def correct_task(self, task):
+	def correct_task(self, new_task):
 		curr_index = self.get_count()
-		self.add_task(task, curr_index)
+		self.add_task(new_task, curr_index)
 		self.set_count(curr_index)
 		
 	def add_new_task(self, task):
