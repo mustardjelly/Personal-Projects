@@ -1,21 +1,21 @@
 import time
 from TaskList import *
 import os
-import json
+import pickle
+
+SAVE_LOC = 'tasky_save.txt'
+
 #Tasky
 def load():
 	print('Welcome to Tasky')
 	task_list = TaskList()
 	try:
-		open_data = []
-		file = open('tasky_save.txt', 'r')
-		in_data = file.readlines()
-		task_list.set_count(in_data.pop(-1))
-		for i in range(len(in_data)):
-			task_list.add_task(in_data[i])
+		file_obj = open(SAVE_LOC, 'rb')
+		task_list = pickle.load(file_obj)
 		print('Previous tasks loaded!')
 	except():
-		open_data = task_list.populate_list()
+		print('here')
+		task_list.populate_list()
 	return task_list
 
 def main_screen(task_list):
@@ -32,11 +32,10 @@ def add_task(task_list):
 		return True
 	else:
 		return False
-		
+
 def save(task_list):
-	file = open('tasky_save.txt', 'w')
-	for task_element in task_list.save():
-		file.write(str(task_element) + "\n")
+	with open(SAVE_LOC, 'wb') as handle:
+		pickle.dump(task_list, handle, -1)
 
 def main():
 	task_list = load()
