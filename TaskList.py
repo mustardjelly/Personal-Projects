@@ -30,6 +30,11 @@ class TaskList:
 		self.taskList[index] = task
 		self.inc_count()
 		
+	def correct_task(self, task):
+		curr_index = self.get_count()
+		self.add_task(task, curr_index)
+		self.set_count(curr_index)
+		
 	def add_new_task(self, task):
 		self.add_task(task)
 		self.inc_count()
@@ -44,3 +49,7 @@ class TaskList:
 	def save(self):
 		print(self.taskList + [self.count])
 		return self.taskList + [self.count]
+		
+	def reset(self):
+		self.populate_list()
+		self.set_count(0)

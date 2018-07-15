@@ -26,16 +26,35 @@ def main_screen(task_list):
 	print('Task List: {0}'.format(task_list.get_tasks()))
 	
 def add_task(task_list):
-	task = str(input('Next Task (x to exit):\n'))
-	if (task.lower() != 'x'):
+	task = str(input('Next Task (x to e(X)it):\n'))
+	if (task.lower() == 'x'):
+		return False
+	elif (task.lower() == 'reset'):
+		task_list.reset()
+		return True
+	elif (task.lower() == 'correct'):
+		change = False
+		task_change = str(input("Enter the corrected task:\n"))
+		confirm = str(input('{0} will be replaced with {1}\nIs this correct? (y/n)?\n'.format(task_list.get_current_task(), task_change))).lower()
+		if (confirm == 'y'):
+			task_list.correct_task(task_change)
+			change = True
+		while (change == False or confirm == 'n'):
+			task_change = str(input("Enter the corrected task:\n"))
+			confirm = str(input('Is this correct? (y/n)?\n')).lower()
+			if (confirm == 'y'):
+				task_list.correct_task(task_change)
+				change = True
+		return True
+		
+	else:
 		task_list.add_task(task)
 		return True
-	else:
-		return False
-
+		
 def save(task_list):
 	with open(SAVE_LOC, 'wb') as handle:
 		pickle.dump(task_list, handle, -1)
+	print('Tasky Saved!')
 
 def main():
 	task_list = load()
