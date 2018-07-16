@@ -22,7 +22,7 @@ def main_screen():
 	print('{0}'.format(time.strftime('%X')))
 	print('Current Task: {0}'.format(current_task))
 	print('Next Task: {0}'.format(next_task))
-	print('Tasks: {0}'.format(task_list))
+	#print('Tasks: {0}'.format(task_list))
 	
 def add_task():
 	task_list = load()
