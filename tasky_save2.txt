@@ -1,8 +1,0 @@
-{
-	'count': 9,
-	'taskList': [
-		'Write a Journal',
-		'Solve world hunger',
-		'Drink a smoothie'
-	]
-}
