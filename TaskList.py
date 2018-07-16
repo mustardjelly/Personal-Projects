@@ -11,7 +11,7 @@ class TaskList:
 		
 	def populate_list(self):
 		for i in range(self.size):
-			self.taskList[i] = str(input("Enter task {0}:".format(i + 1)))
+			self.taskList[i] = str(input("Enter task {0}: ".format(i + 1)))
 			while (self.taskList[i] == ""):
 				print("No input detected!")
 				self.taskList[i] = str(input("Enter task {0}:".format(i + 1)))
@@ -51,9 +51,8 @@ class TaskList:
 		return self.taskList[curr_index]
 		
 	def get_next_task(self):
-		curr_index = self.count % self.size
-		return self.taskList[curr_index + 1]
-		
+		curr_index = (self.get_count() + 1) % self.size 
+		return self.taskList[curr_index]
 		
 	def get_tasks(self):
 		return self.taskList
