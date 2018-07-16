@@ -46,6 +46,10 @@ def add_task():
 		
 		save(task_list)
 		return True
+	elif (task.lower() == 'next'):
+		task_list.inc_count()
+		save(task_list)
+		return True
 	# Replace task and deliver new task
 	else:
 		task_list.add_task(task)
@@ -65,7 +69,7 @@ def confirm():
 def save(task_list):
 	with open(SAVE_LOC, 'wb') as handle:
 		pickle.dump(task_list, handle, -1)
-	print('Tasky Saved!')
+	#print('Tasky Saved!')
 	
 def new():
 	can_continue = False
