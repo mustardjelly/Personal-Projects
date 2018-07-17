@@ -21,7 +21,7 @@ def main_screen():
 	print('The current time is: ', end='')
 	print('{0}'.format(time.strftime('%X')))
 	print('Current Task: {0}'.format(current_task))
-	print('Next Task: {0}'.format(next_task))
+	#print('Next Task: {0}'.format(next_task))
 	#print('Tasks: {0}'.format(task_list))
 	
 def add_task():
@@ -43,8 +43,7 @@ def add_task():
 		print('{0} will be replaced with {1}'.format(task_list.get_current_task(), task_change))
 		if (confirm()):
 			task_list.correct_task(task_change)
-		
-		save(task_list)
+			save(task_list)
 		return True
 	elif (task.lower() == 'next'):
 		task_list.inc_count()
